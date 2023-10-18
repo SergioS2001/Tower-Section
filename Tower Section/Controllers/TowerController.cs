@@ -5,9 +5,9 @@ namespace Tower_Section.Controllers
     public class TowerController : Controller
     {
         // GET
-        public IActionResult Index()
+        public string Index()
         {
-            return View();
+            return "Tower Controller, ainda por fazer";
         }
     }
 }

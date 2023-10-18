@@ -5,9 +5,9 @@ namespace Tower_Section.Controllers
     public class ShellController : Controller
     {
         // GET
-        public IActionResult Index()
+        public string Index()
         {
-            return View();
+            return "Shell Controller, ainda por fazer";
         }
     }
 }
