@@ -25,7 +25,8 @@
 
 
 <h3>Add New Tower Section</h3>
-@using (Html.BeginForm("Add_Section", "Section", FormMethod.Post))
+@using (Html.BeginForm("DB_Seed_Section", "Section", FormMethod.Post))
+//@using (Html.BeginForm("Add_Section", "Section", FormMethod.Post))
 {
     <label for="partNumber">Part Number:</label>
     <input type="text" name="partNumber" id="partNumber" /><br />

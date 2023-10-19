@@ -52,15 +52,13 @@ namespace Tower_Section.Controllers
             shell.Add(Shell2);
             shell.Add(Shell3);
             shell.Add(Shell4);
-
-                
             return RedirectToAction("Index");
         }
         
         public IActionResult Index()
         {
             // Replace with code to retrieve data from the model
-            var data = GetInfoFromShell();
+            var data = DB_Seed_Section();
 
             return View(data);
         }
