@@ -1,0 +1,46 @@
+@model List<ShellViewModel>
+
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+
+
+<h2>List of Shell</h2>
+<table>
+    <tr>
+        <th>Shell ID</th>
+        <th>Bottom</th>
+        <th>section</th>
+        <th>height</th>
+        <th>thickness</th>
+        <th>steel</th>
+
+
+        <!-- Add more table headers for additional properties -->
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Shell_id</td>
+            <td>@item.bottom_diameter</td>
+            <td>@item.section_id</td>
+            <td>@item.height</td>
+            <td>@item.thickness</td>
+            <td>@item.steel_density</td>
+        </tr>
+    }
+</table>

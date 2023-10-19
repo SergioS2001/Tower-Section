@@ -33,5 +33,21 @@ namespace Tower_Section.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult Tower()
+        {
+            return View();
+        }
+
+        public IActionResult Section()
+        {
+            return View();
+        }
+
+        public IActionResult Shell()
+        {
+            return View();
+        }
+        
     }
 }

@@ -1,0 +1,43 @@
+@model List<SectionViewModel>
+
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+
+
+<h2>List of Sections</h2>
+<table>
+    <tr>
+        <th>Tower</th>
+        <th>Part Number</th>
+        <th>Bottom</th>  
+        <th>top</th>
+        <th>Number Shell</th>
+      
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Tower_id</td>
+            <td>@item.part_number</td>
+            <td>@item.bottom_diameter</td>
+            <th>@item.top_diameter</th>
+            <td>@item.number_shell</td>
+        </tr>
+    }
+</table>

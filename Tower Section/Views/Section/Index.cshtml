@@ -1,0 +1,118 @@
+@model List<SectionViewModel>
+
+<h2>Tower Sections Catalog</h2>
+<ul>
+    @foreach (var section in Model)
+    {
+        <li>
+            Part Number: section.part_number
+            <ul>
+                @foreach (var shell in section.number_shell)
+                {
+                    <li>
+                        Shell Position: @shell.shell_position
+                        Height: @shell.height
+                        Bottom Diameter: @shell.bottom_diameter
+                        Thickness: @shell.thickness
+                        Steel Density: @shell.steel_density
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+</ul>
+
+
+
+<h3>Add New Tower Section</h3>
+@using (Html.BeginForm("Add_Section", "Section", FormMethod.Post))
+{
+    <label for="partNumber">Part Number:</label>
+    <input type="text" name="partNumber" id="partNumber" /><br />
+    <input type="submit" value="Add Tower Section" />
+}
+
+<h3>Add Shell to Section</h3>
+@using (Html.BeginForm("AddShell", "Section", FormMethod.Post))
+{
+    <label for="sectionId">Section ID:</label>
+    <input type="text" name="sectionId" id="sectionId" /><br />
+    <label for="height">Height:</label>
+    <input type="text" name="height" id="height" /><br />
+    <label for="bottomDiameter">Bottom Diameter:</label>
+    <input type="text" name="bottomDiameter" id="bottomDiameter" /><br />
+    <label for="thickness">Thickness:</label>
+    <input type="text" name="thickness" id="thickness" /><br />
+    <label for="steelDensity">Steel Density:</label>
+    <input type="text" name="steelDensity" id="steelDensity" /><br />
+    <input type="submit" value="Add Shell" />
+}
+
+<h2>Delete Section</h2>
+@foreach (var x in Model)
+{
+    <li>
+        Part Number: @x.part_number
+        <form asp-controller="Section" asp-action="DeleteSection" method="post">
+             <input type="text" name="Towerid" id="towerid" />
+            <input type="hidden" name="Tower_id" value="@x.Tower_id"/>
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+}
+
+<label for="partNumber">Part Number To delete:</label>
+<input type="text" name="partNumber" id="partNumber" /><br />
+<input type="submit" value="Delete Section" />
+
+<h2>Search by part number</h2>
+
+@using (Html.BeginForm("SearchSection", "Section", FormMethod.Get))
+{
+    <label for="partNumber">Search by Part Number:</label>
+    <input type="text" name="partNumber" id="partNumber" />
+    <input type="submit" value="Search" />
+}
+
+<h2>Search by Diameter</h2>
+@using (Html.BeginForm("SearchSectionbyDiameter", "Section", FormMethod.Get))
+{
+    <label for="searchTerm">Search Term:</label>
+    <input type="text" name="searchTerm" id="searchTerm" />
+    <label for="searchBy">Search By:</label>
+    <select name="searchBy" id="searchBy">
+        <option value="TopDiameter">Top Diameter</option>
+        <option value="BottomDiameter">Bottom Diameter</option>
+    </select>
+    <input type="submit" value="Search" />
+}
+
+<h2>Edit</h2>
+@using (Html.BeginForm("UpdateSection", "Section", FormMethod.Post))
+{
+    @foreach (var i in Model)
+    {
+        <li>
+            Part Number: @i.part_number
+            <!-- Other section details -->
+            <a asp-action="EditSection" asp-route-Tower_id="@i.Tower_id">Edit</a>
+        </li>
+        <h1>Teste</h1>
+
+
+        @Html.HiddenFor(model => i.Tower_id)
+        <div class="form-group">
+            @Html.LabelFor(model => i.part_number)
+            @Html.EditorFor(model => i.part_number, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => i.bottom_diameter)
+            @Html.EditorFor(model => i.bottom_diameter, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => i.top_diameter)
+            @Html.EditorFor(model => i.top_diameter, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <input type="submit" value="Save" class="btn btn-primary"/>
+    }
+}
