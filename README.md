@@ -7,29 +7,6 @@ This project is built on the MVC .NET Layout
 
 Before you begin, ensure you have met the following requirements:
 
-- [Node.js](https://nodejs.org/) (version X.X.X)
-- [npm](https://www.npmjs.com/) (version X.X.X)
-- [Git](https://git-scm.com/)
-
-## Getting Started
-
-1. First, clone this repository to your local machine using your terminal or command prompt:
-
-   ```bash
-   git clone https://github.com/SergioS2001/Tower-Section.git
-
-   Certainly, here's an example of a README.md file that provides step-by-step instructions for running a web app locally. This is a basic template; you can customize it further with additional details as needed.
-
-markdown
-
-# My Web App
-
-This is a simple guide to help you run our web application locally for development or testing purposes.
-
-## Prerequisites
-
-Before you begin, ensure you have met the following requirements:
-
 - [NET SDK]: You should have the .NET SDK installed on your system. You can download it from [here](https://dotnet.microsoft.com/download/dotnet).
 - [Git](https://git-scm.com/)
 
@@ -40,9 +17,6 @@ Before you begin, ensure you have met the following requirements:
    ```bash
    git clone https://github.com/SergioS2001/Tower-Section.git
 
-    Navigate to the project's root directory:
-
-    bash
 in CMD type, inside the project folder:
 
 dotnet build
