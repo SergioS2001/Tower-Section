@@ -10,7 +10,45 @@ namespace Tower_Section.Controllers
     public class SectionController : Controller
     {
         //list of sections inside a certain tower
-        private List<SectionViewModel> section = new List<SectionViewModel>();
+        private List<SectionViewModel> section = new List<SectionViewModel>
+        {
+            new SectionViewModel()
+            {
+                part_number = "1",
+                number_shell = new List<ShellViewModel>(),  
+                bottom_diameter = 1,
+                top_diameter = 2,
+                Tower_id = 1
+            
+            },
+            new SectionViewModel()
+            {
+                part_number = "2",
+                bottom_diameter = 10,
+                top_diameter = 20,
+                number_shell = new List<ShellViewModel>(),
+                Tower_id = 1
+                
+                
+            },
+            new SectionViewModel()
+            {
+                part_number = "3",
+                bottom_diameter = 20,
+                top_diameter = 20,
+                number_shell = new List<ShellViewModel>(),
+                Tower_id = 2
+            },
+            new SectionViewModel()
+            {
+            part_number = "4",
+            bottom_diameter = 10,
+            top_diameter = 10,
+            number_shell = new List<ShellViewModel>(),
+            Tower_id = 2
+        }
+        };
+        
 
         public ActionResult Index()
         {
@@ -26,13 +64,13 @@ namespace Tower_Section.Controllers
             };
 
             // if the section is empty, we throw a exeption because it needs at least 1 shell per section
-                if (number_shells.Count < 1)
+                if (new_Section.number_shell.Count < 1)
                 {
                       throw new ValidationException("At least one shell per section");
                 }
             
                     int pos = 0;
-                    foreach (var i in number_shells)
+                    foreach (var i in new_Section.number_shell)
                     {
                         //if the shell position doesnt start with 1 or the values arent aligned then it isnt sequential
                         if (i.shell_position < 1 || i.shell_position != pos + 1)
@@ -55,12 +93,9 @@ namespace Tower_Section.Controllers
             {
                 throw new ValidationException("Section is null, it must contain at least one shell.");
             }
-            else
-            {
                 //increment number of shells
-                var shellPosition = section.number_shell.Count + 1;
-                section.number_shell.Add(new ShellViewModel
-                {
+                var shellPosition = section.number_shell.Count() + 1;
+                section.number_shell.Add(new ShellViewModel{
                     bottom_diameter = BottomDiameter,
                     thickness = thickness,
                     steel_density = steel_density,
@@ -68,40 +103,9 @@ namespace Tower_Section.Controllers
                     section_id = Section_id
 
                 });
-            }
             return RedirectToAction("Index");
         }
 
-        public ActionResult DB_Seed_Section(List<ShellViewModel> number_shells)
-            {
-                var Section1 = new SectionViewModel()
-                {
-                    part_number = "1",
-                    bottom_diameter = 1,
-                    top_diameter = 2,
-                    number_shell = number_shells
-                };
-                var Section2 = new SectionViewModel()
-                {
-                    part_number = "2",
-                    bottom_diameter = 10,
-                    top_diameter = 20,
-                    number_shell = number_shells
-                };
-                var Section3 = new SectionViewModel()
-                {
-                    part_number = "3",
-                    bottom_diameter = 20,
-                    top_diameter = 20,
-                    number_shell = number_shells
-                };
-                section.Add(Section1);
-                section.Add(Section2);
-                section.Add(Section3);
-                
-                return RedirectToAction("Index");
-            }
-        
         public IActionResult ListInfo()
         {
             // Replace with code to retrieve data from the model

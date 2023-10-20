@@ -1,37 +1,57 @@
 @model List<SectionViewModel>
 
-<h2>Tower Sections Catalog</h2>
-<ul>
-    @foreach (var section in Model)
-    {
-        <li>
-            Part Number: section.part_number
-            <ul>
-                @foreach (var shell in section.number_shell)
-                {
-                    <li>
-                        Shell Position: @shell.shell_position
-                        Height: @shell.height
-                        Bottom Diameter: @shell.bottom_diameter
-                        Thickness: @shell.thickness
-                        Steel Density: @shell.steel_density
-                    </li>
-                }
-            </ul>
-        </li>
-    }
-</ul>
 
+<table class="table">
+    <tr>
+        <th>
+           <label for="partNumber">Part Number</label>
+        </th>
+        <th>
+            <label for="Tower ID">Tower Id</label>
+        </th>
+        <th>
+            <label for="NumberShell">Number Shell</label>
+        </th>
+        <th>
+            <label for="TopD">Top Diameter</label>
+        </th>
+        <th>
+            <label for="BotD">Bottom Diameter</label>
+        </th>
+        <th></th>
+    </tr>
 
-
-<h3>Add New Tower Section</h3>
-@using (Html.BeginForm("DB_Seed_Section", "Section", FormMethod.Post))
-//@using (Html.BeginForm("Add_Section", "Section", FormMethod.Post))
-{
-    <label for="partNumber">Part Number:</label>
-    <input type="text" name="partNumber" id="partNumber" /><br />
-    <input type="submit" value="Add Tower Section" />
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.part_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tower_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.number_shell)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.top_diameter)
+        </td>      
+        <td>
+                    @Html.DisplayFor(modelItem => item.bottom_diameter)
+                </td>
+        <td>
+            @Html.ActionLink("Edit", "EditSection", new { id=item.part_number }) |
+            @Html.ActionLink("Delete", "DeleteSection", new { id = item.part_number })
+        </td>
+    </tr>
 }
+
+</table>
+
+<br>
+<br>
+<br>
+<br>
+
 
 <h3>Add Shell to Section</h3>
 @using (Html.BeginForm("AddShell", "Section", FormMethod.Post))
@@ -48,23 +68,24 @@
     <input type="text" name="steelDensity" id="steelDensity" /><br />
     <input type="submit" value="Add Shell" />
 }
+<br>
+<br>
+<br>
+<br>
+<br>
 
-<h2>Delete Section</h2>
-@foreach (var x in Model)
+@using (Html.BeginForm("DeleteSection", "Section", FormMethod.Post))
 {
-    <li>
-        Part Number: @x.part_number
-        <form asp-controller="Section" asp-action="DeleteSection" method="post">
-             <input type="text" name="Towerid" id="towerid" />
-            <input type="hidden" name="Tower_id" value="@x.Tower_id"/>
-            <button type="submit">Delete</button>
-        </form>
-    </li>
+    <label for="partNumber">Part Number To delete:</label>
+    <input type="text" name="partNumber" id="partNumber"/>
+    <br/>
+    <input type="submit" value="Delete Section"/>
 }
-
-<label for="partNumber">Part Number To delete:</label>
-<input type="text" name="partNumber" id="partNumber" /><br />
-<input type="submit" value="Delete Section" />
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <h2>Search by part number</h2>
 
@@ -74,6 +95,11 @@
     <input type="text" name="partNumber" id="partNumber" />
     <input type="submit" value="Search" />
 }
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <h2>Search by Diameter</h2>
 @using (Html.BeginForm("SearchSectionbyDiameter", "Section", FormMethod.Get))
@@ -87,33 +113,12 @@
     </select>
     <input type="submit" value="Search" />
 }
-
-<h2>Edit</h2>
-@using (Html.BeginForm("UpdateSection", "Section", FormMethod.Post))
-{
-    @foreach (var i in Model)
-    {
-        <li>
-            Part Number: @i.part_number
-            <!-- Other section details -->
-            <a asp-action="EditSection" asp-route-Tower_id="@i.Tower_id">Edit</a>
-        </li>
-        <h1>Teste</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 
-        @Html.HiddenFor(model => i.Tower_id)
-        <div class="form-group">
-            @Html.LabelFor(model => i.part_number)
-            @Html.EditorFor(model => i.part_number, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => i.bottom_diameter)
-            @Html.EditorFor(model => i.bottom_diameter, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => i.top_diameter)
-            @Html.EditorFor(model => i.top_diameter, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <input type="submit" value="Save" class="btn btn-primary"/>
-    }
-}

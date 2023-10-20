@@ -8,11 +8,9 @@ namespace Tower_Section.Controllers
 {
     public class ShellController : Controller
     {
-        private List<ShellViewModel> shell = new List<ShellViewModel>();
-
-        public ActionResult DB_Seed_Section()
+        private List<ShellViewModel> shell = new List<ShellViewModel>()
         {
-            var Shell1 = new ShellViewModel()
+            new ShellViewModel()
             {
                 Shell_id = 1,
                 bottom_diameter = 1,
@@ -20,8 +18,8 @@ namespace Tower_Section.Controllers
                 height = 10,
                 thickness = 1,
                 steel_density = 10
-            };
-            var Shell2 = new ShellViewModel()
+            },
+            new ShellViewModel()
             {
                 Shell_id = 2,
                 bottom_diameter = 3,
@@ -29,8 +27,8 @@ namespace Tower_Section.Controllers
                 height = 6,
                 thickness = 2,
                 steel_density = 10
-            };
-            var Shell3 = new ShellViewModel()
+            },
+            new ShellViewModel()
             {
                 Shell_id = 3,
                 bottom_diameter = 4,
@@ -38,8 +36,8 @@ namespace Tower_Section.Controllers
                 height = 10,
                 thickness = 1,
                 steel_density = 10
-            };
-            var Shell4 = new ShellViewModel()
+            },
+            new ShellViewModel()
             {
                 Shell_id = 1,
                 bottom_diameter = 1,
@@ -47,20 +45,12 @@ namespace Tower_Section.Controllers
                 height = 10,
                 thickness = 1,
                 steel_density = 10
-            };
-            shell.Add(Shell1);
-            shell.Add(Shell2);
-            shell.Add(Shell3);
-            shell.Add(Shell4);
-            return RedirectToAction("Index");
-        }
+            }
+        };
         
         public IActionResult Index()
         {
-            // Replace with code to retrieve data from the model
-            var data = DB_Seed_Section();
-
-            return View(data);
+            return View(shell);
         }
         
         private List<ShellViewModel> GetInfoFromShell()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Common;
 
 namespace Tower_Section.Models
 {
@@ -16,4 +17,6 @@ namespace Tower_Section.Models
         public List<ShellViewModel> number_shell { get; set; }
 
     }
+
+  
 }
